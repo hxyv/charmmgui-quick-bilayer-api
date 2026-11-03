@@ -1,0 +1,5 @@
+session.token
+*.tgz
+charmm-gui-*/
+.DS_Store
+__pycache__/
