@@ -94,7 +94,7 @@ def wait(tok, jobid, every=30):
             continue
         s = d.get("status") or ""
         print(f"{time.strftime('%H:%M:%S')} {jobid} {s or 'null'} {d.get('lastOutFile')}", flush=True)
-        if s == "done" and str(d.get("lastInpStep")) != "6":  # e.g. no margin: stops at step 4, still "done"
+        if s == "done" and int(d.get("lastInpStep") or 0) < 6:  # e.g. no margin: stops at step 4, still "done"
             sys.exit(f"job {jobid} ended without an archive (last step {d.get('lastInpStep')}, "
                      f"{d.get('lastOutFile')})")
         if s == "done" or s.startswith("error"):

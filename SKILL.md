@@ -21,10 +21,12 @@ in `references/api.md`; the test jobs behind every statement here are in
    PDB Reader (or full Membrane Builder) job made in the web interface; always add `--clone`
    so the build runs in a copy and the source job stays reusable. A membrane-only system needs
    no job ID.
-3. **Orientation.** Without `--ppm` the protein keeps its PDB Reader coordinates and the
-   bilayer is centred at about z = 0 of that frame, normal along z. Any translation or rotation
-   done in the web Orient step is not reused. Either supply a structure already placed in that
-   frame or use `--ppm`, and check the placement in the result.
+3. **Orientation.** Use `--ppm` unless the input is already placed in the membrane frame.
+   With it, the API build of an AF3 trimer matched the web PPM build to 0.2 Å in depth and
+   1° in tilt (`ppm.out` reports ΔG transfer, hydrophobic thickness and tilt). Without it
+   the protein keeps its PDB Reader coordinates, with the bilayer at about z = 0 of that frame,
+   normal along z; the same trimer came out 9 Å too high and tilted 34°, and any web Orient
+   step is not reused. Check the placement in the result either way.
 4. **Protocol clash.** API builds always use hydrogen mass repartitioning, a 4 fs step and
    303.15 K in every engine's inputs; `hmr=false` and `temp=` are silently ignored. If the
    project's protocol differs (e.g. 2 fs without HMR, 310.15 K), say so before submitting and
@@ -50,7 +52,7 @@ python3 $H download 1234567890 out.tgz
 ```
 
 `--ffconverter` is needed for any engine other than CHARMM. Builds take 3–4 min for a ~40 Å
-membrane and about 20 min for 80–100 Å systems; with `--wait` run the command in the
+membrane and 15–20 min for 80–100 Å systems; with `--wait` run the command in the
 background (or under `nohup`) rather than holding a foreground shell. Archives are 30–110 MB;
 unpack each into a new empty directory.
 
@@ -70,7 +72,7 @@ unpack each into a new empty directory.
 - The server validates nothing: a request without `margin` or lipids is "submitted". Without
   lipids the job ends in `error occurred from quick_bilayer`; without `margin` it reports
   `done` after step 4 with no archive. A job is complete only when `status` is `done` and
-  `lastInpStep` is 6.
+  `lastInpStep` is at least 6 (6 or 7 seen).
 - `check_status` replies contain raw control characters in `lastOutLine`: `jq` and strict
   JSON parsers fail; parse with `json.loads(text, strict=False)`.
 - Web-interface jobs and unknown job IDs both report `status: null`; `lastOutTime` is US

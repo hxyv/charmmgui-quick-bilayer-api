@@ -17,6 +17,9 @@ Errors: no token â†’ HTTP 401 `{"error":"No token provided"}`; malformed token â
 `{"error":"Invalid token","detail":"Expired token"}` (from the official toolkit). A
 Quick Bilayer request with neither `jobid` nor `membrane_only` returns an HTML redirect form.
 
+`lastInpStep` of a complete build: 6 or 7 (7 seen for builds from a plain PDB Reader job);
+an incomplete build stopped at 4.
+
 `status` values seen: `running quick_bilayer`, `running ffconverter`, `compressing`, `done`,
 `error occurred from quick_bilayer`; `null` for web-interface jobs and unknown IDs.
 
