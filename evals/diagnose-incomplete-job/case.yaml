@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: diagnose-incomplete-job
+expected_outcome: |
+  The job is found to have failed (status 'error occurred from ffconverter', CHARMM message that the number of lipids is too small, no gromacs/ folder); no files are presented as usable; the cause is traced to the request having no box size (no margin), and the user is told to resubmit with an explicit margin; nothing new is submitted.

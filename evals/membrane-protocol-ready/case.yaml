@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: membrane-protocol-ready
+expected_outcome: |
+  A membrane-only POPE:POPG=3:1 KCl build (~60 Å box) is downloaded, and a converted copy of its gromacs folder is delivered with standard hydrogen masses (about 1.008 instead of 3.024, molecule masses unchanged), dt 0.002 in production with step counts scaled to keep simulated times, and 310.15 K in every ref_t/gen_temp. grompp with GROMACS 2023.2 passes without warnings or -maxwarn and steepest-descent minimisation converges. The report gives box and counts.

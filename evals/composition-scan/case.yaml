@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: composition-scan
+expected_outcome: |
+  Three Quick Bilayer jobs are submitted from 9377181149, each with clone_job and PPM, the same margin, KCl and FF-Converter, with compositions POPE:POPG=3:1, POPC, POPC:CHL1=7:3; all complete and are downloaded; the source job is shown to be unchanged; a table compares box, lipids per leaflet, ions and protein placement measured from coordinates.

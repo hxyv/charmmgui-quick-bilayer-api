@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: protein-from-pdbreader-job
+expected_outcome: |
+  A cloned, PPM-oriented build from 9377181149 with POPE:POPG=3:1 and KCl is downloaded; the protein's placement is measured; the inputs are converted to standard masses, 2 fs and 310.15 K (or the needed changes are exactly specified); and the report raises the issues specific to this system that a careful modeller would notice.
